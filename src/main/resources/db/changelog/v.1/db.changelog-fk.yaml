@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4-foreignKey-projects-to-users
+      author: Nick
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: projects
+            constraintName: fk_projects_users
+            referencedColumnNames: id
+            referencedTableName: users
+            onDelete: CASCADE
+  - changeSet:
+        id: 5-foreignKey-tasks-to-projects
+        author: Nick
+        changes:
+            - addForeignKeyConstraint:
+                  baseColumnNames: project_id
+                  baseTableName: tasks
+                  constraintName: fk_tasks_projects
+                  referencedColumnNames: id
+                  referencedTableName: projects
+                  onDelete: CASCADE
