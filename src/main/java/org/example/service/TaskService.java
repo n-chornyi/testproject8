@@ -3,7 +3,6 @@ package org.example.service;
 import org.example.dto.task.BaseTaskDTO;
 import org.example.dto.task.CreateTaskDTO;
 import org.example.dto.task.UpdateTaskDTO;
-import org.example.entity.Task;
 
 import java.util.List;
 
