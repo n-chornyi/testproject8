@@ -11,10 +11,11 @@ import java.util.Optional;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 
-    List<Task> findAllByProjectId(int id);
+    List<Task> findAllByProjectIdAndProjectUserLogin(int id, String login);
 
-    Optional<Task> findByIdAndProjectId(int id, int projectId);
+    Optional<Task> findByIdAndProjectIdAndProjectUserLogin(int id, int projectId, String login);
 
     boolean existsByIdAndProjectId(int id, int projectId);
 
+    void deleteByIdAndProjectIdAndProjectUserLogin(int id, int projectId, String login);
 }

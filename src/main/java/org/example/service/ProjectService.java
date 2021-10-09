@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface ProjectService {
 
-    BaseProjectDTO save(CreateProjectDTO project);
+    BaseProjectDTO save(CreateProjectDTO project, String login);
 
-    BaseProjectDTO getById(int id);
+    BaseProjectDTO getById(int id, String login);
 
-    void deleteById(int id);
+    void deleteById(int id, String login);
 
-    List<BaseProjectDTO> getAll();
+    List<BaseProjectDTO> getAll(String login);
 
-    BaseProjectDTO updateById(int id, UpdateProjectDTO updateProjectDTO);
+    BaseProjectDTO updateById(int id, UpdateProjectDTO updateProjectDTO, String login);
 }

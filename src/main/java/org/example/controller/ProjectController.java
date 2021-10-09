@@ -6,6 +6,7 @@ import org.example.dto.project.BaseProjectDTO;
 import org.example.dto.project.CreateProjectDTO;
 import org.example.dto.project.UpdateProjectDTO;
 import org.example.service.ProjectService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,31 +32,36 @@ public class ProjectController {
     @GetMapping
     @ApiOperation("Get all projects")
     public List<BaseProjectDTO> getAll() {
-        return projectService.getAll();
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        return projectService.getAll(login);
     }
 
     @GetMapping("/{projectId}")
     @ApiOperation("Get project by id")
     public BaseProjectDTO getById(@PathVariable(name = "projectId") @NotNull int id) {
-        return projectService.getById(id);
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        return projectService.getById(id, login);
     }
 
     @PostMapping
     @ApiOperation("Add new project")
     public BaseProjectDTO addProject(@RequestBody @NotNull CreateProjectDTO project) {
-        return projectService.save(project);
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        return projectService.save(project, login);
     }
 
     @PutMapping("/{id}")
     @ApiOperation("Update project")
     public BaseProjectDTO updateById(@PathVariable(name = "id") @NotNull int id,
                             @RequestBody @NotNull UpdateProjectDTO updateProjectDTO) {
-        return projectService.updateById(id, updateProjectDTO);
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        return projectService.updateById(id, updateProjectDTO, login);
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation("Delete project")
     void deleteById(@PathVariable(name = "id") @NotNull int id) {
-        projectService.deleteById(id);
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        projectService.deleteById(id, login);
     }
 }

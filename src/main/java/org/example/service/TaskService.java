@@ -8,14 +8,14 @@ import java.util.List;
 
 public interface TaskService {
 
-    BaseTaskDTO save(int projectId, CreateTaskDTO createTaskDTO);
+    BaseTaskDTO save(int projectId, CreateTaskDTO createTaskDTO, String login);
 
-    BaseTaskDTO getById(int projectId, int TaskId);
+    BaseTaskDTO getById(int projectId, int TaskId, String login);
 
-    void deleteById(int projectId, int taskId);
+    void deleteById(int projectId, int taskId, String login);
 
-    List<BaseTaskDTO> getAll(int projectId);
+    List<BaseTaskDTO> getAll(int projectId, String login);
 
-    BaseTaskDTO updateById(int projectId, int taskId, UpdateTaskDTO updateTaskDTO);
+    BaseTaskDTO updateById(int projectId, int taskId, UpdateTaskDTO updateTaskDTO, String login);
 
 }
