@@ -28,7 +28,8 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     public BaseProjectDTO save(CreateProjectDTO createProjectDTO, String login) {
         Project project = projectMapper.parseDTO(createProjectDTO);
-        User user = userRepository.findByLogin(login);
+        User user = userRepository.findByLogin(login)
+                .orElseThrow(() -> new NotFoundExeption("User not found"));
         project.setUser(user);
         return projectMapper.getDTO(projectRepository.save(project));
     }
