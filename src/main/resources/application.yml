@@ -5,8 +5,8 @@ spring:
       ddl-auto: validate
     open-in-view: false
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/todolist?useUnicode=yes&characterEncoding=UTF-8
-    username: root
-    password:
+    driver-class-name: org.postgresql.Driver
+    url: postgres://tvupxdrgzwdgdc:8fabcfb0ec435008d2c0bd19226b7c776964b49d3f52743605cd6a1a83771b64@ec2-54-229-68-88.eu-west-1.compute.amazonaws.com:5432/deiqncl1blt5uk
+    username: tvupxdrgzwdgdc
+    password: 8fabcfb0ec435008d2c0bd19226b7c776964b49d3f52743605cd6a1a83771b64
 
