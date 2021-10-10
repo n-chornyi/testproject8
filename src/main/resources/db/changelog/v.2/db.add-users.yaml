@@ -7,9 +7,6 @@ databaseChangeLog:
             tableName: users
             columns:
               - column:
-                  name: id
-                  value: 1
-              - column:
                   name: login
                   value: "user1"
               - column:
@@ -21,9 +18,6 @@ databaseChangeLog:
         - insert:
             tableName: users
             columns:
-              - column:
-                  name: id
-                  value: 2
               - column:
                   name: login
                   value: "user2"

@@ -7,9 +7,6 @@ databaseChangeLog:
             tableName: tasks
             columns:
               - column:
-                  name: id
-                  value: 1
-              - column:
                   name: title
                   value: "task1"
               - column:
@@ -18,9 +15,6 @@ databaseChangeLog:
         - insert:
             tableName: tasks
             columns:
-              - column:
-                  name: id
-                  value: 2
               - column:
                   name: title
                   value: "task2"
@@ -31,9 +25,6 @@ databaseChangeLog:
             tableName: tasks
             columns:
               - column:
-                  name: id
-                  value: 3
-              - column:
                   name: title
                   value: "task3"
               - column:
@@ -42,9 +33,6 @@ databaseChangeLog:
         - insert:
             tableName: tasks
             columns:
-              - column:
-                  name: id
-                  value: 4
               - column:
                   name: title
                   value: "task4"
@@ -55,9 +43,6 @@ databaseChangeLog:
             tableName: tasks
             columns:
               - column:
-                  name: id
-                  value: 5
-              - column:
                   name: title
                   value: "task5"
               - column:
@@ -66,9 +51,6 @@ databaseChangeLog:
         - insert:
             tableName: tasks
             columns:
-              - column:
-                  name: id
-                  value: 6
               - column:
                   name: title
                   value: "task6"
@@ -79,9 +61,6 @@ databaseChangeLog:
             tableName: tasks
             columns:
               - column:
-                  name: id
-                  value: 7
-              - column:
                   name: title
                   value: "task7"
               - column:
@@ -90,9 +69,6 @@ databaseChangeLog:
         - insert:
             tableName: tasks
             columns:
-              - column:
-                  name: id
-                  value: 8
               - column:
                   name: title
                   value: "task8"

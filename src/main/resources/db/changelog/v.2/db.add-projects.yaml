@@ -7,9 +7,6 @@ databaseChangeLog:
             tableName: projects
             columns:
               - column:
-                  name: id
-                  value: 1
-              - column:
                   name: name
                   value: "project1"
               - column:
@@ -18,9 +15,6 @@ databaseChangeLog:
         - insert:
             tableName: projects
             columns:
-              - column:
-                  name: id
-                  value: 2
               - column:
                   name: name
                   value: "project2"
@@ -31,9 +25,6 @@ databaseChangeLog:
             tableName: projects
             columns:
               - column:
-                  name: id
-                  value: 3
-              - column:
                   name: name
                   value: "project3"
               - column:
@@ -42,9 +33,6 @@ databaseChangeLog:
         - insert:
             tableName: projects
             columns:
-              - column:
-                  name: id
-                  value: 4
               - column:
                   name: name
                   value: "project4"

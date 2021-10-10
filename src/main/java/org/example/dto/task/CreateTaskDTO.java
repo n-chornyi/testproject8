@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Data
 public class CreateTaskDTO {
@@ -15,4 +16,5 @@ public class CreateTaskDTO {
     @Size(min = 5, max = 255, message = "Length title {min}-{max} characters")
     private String title;
     private boolean status;
+    private LocalDateTime endTime;
 }

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -33,6 +34,9 @@ public class Task {
 
     @Column(name = "status")
     private boolean status;
+
+    @Column(name = "end_time")
+    private LocalDateTime endTime;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "project_id")
