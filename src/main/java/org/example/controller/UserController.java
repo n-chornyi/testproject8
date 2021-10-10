@@ -2,18 +2,16 @@ package org.example.controller;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.user.AuthUser;
 import org.example.dto.user.CreateUserDTO;
 import org.example.dto.user.UserDTO;
-import org.example.exception.NotFoundExeption;
+import org.example.exception.NotFoundException;
 import org.example.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.token.Sha512DigestUtils;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.util.DigestUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +35,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
+    @ApiOperation("Authorization user")
     public AuthUser login(@RequestParam(value = "login", required = true) String login,
                           @RequestParam(value = "password", required = true) String password) {
 
@@ -51,10 +50,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
+    @ApiOperation("Register new users")
     public AuthUser register(@RequestBody @NotNull CreateUserDTO createUserDTO) {
 
         if (userService.existsByLogin(createUserDTO.getLogin())) {
-            throw new NotFoundExeption("User exits");
+            throw new NotFoundException("User exits");
         }
         createUserDTO.setPassword(Sha512DigestUtils.shaHex(createUserDTO.getPassword()));
         UserDTO userDTO = userService.save(createUserDTO);

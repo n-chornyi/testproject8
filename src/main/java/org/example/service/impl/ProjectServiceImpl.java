@@ -6,7 +6,7 @@ import org.example.dto.project.CreateProjectDTO;
 import org.example.dto.project.UpdateProjectDTO;
 import org.example.entity.Project;
 import org.example.entity.User;
-import org.example.exception.NotFoundExeption;
+import org.example.exception.NotFoundException;
 import org.example.mapper.ProjectMapper;
 import org.example.repository.ProjectRepository;
 import org.example.repository.UserRepository;
@@ -29,7 +29,7 @@ public class ProjectServiceImpl implements ProjectService {
     public BaseProjectDTO save(CreateProjectDTO createProjectDTO, String login) {
         Project project = projectMapper.parseDTO(createProjectDTO);
         User user = userRepository.findByLogin(login)
-                .orElseThrow(() -> new NotFoundExeption("User not found"));
+                .orElseThrow(() -> new NotFoundException("User not found"));
         project.setUser(user);
         return projectMapper.getDTO(projectRepository.save(project));
     }
@@ -47,7 +47,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     public void deleteById(int id, String login) {
         if (!projectRepository.existsByIdAndUserLogin(id,login)) {
-            throw new NotFoundExeption("Not found project");
+            throw new NotFoundException("Not found project");
         }
         projectRepository.deleteByIdAndUserLogin(id, login);
     }
