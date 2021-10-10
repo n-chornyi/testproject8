@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6-add-vendor-to-discount
+      author: Nick
+      changes:
+        - addColumn:
+            tableName: tasks
+            columns:
+              - column:
+                  name: end_time
+                  type: timestamp

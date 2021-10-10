@@ -1,0 +1,101 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-tasks-data
+      author: Nick
+      changes:
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: title
+                  value: "task1"
+              - column:
+                  name: project_id
+                  value: 1
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: title
+                  value: "task2"
+              - column:
+                  name: project_id
+                  value: 1
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: title
+                  value: "task3"
+              - column:
+                  name: project_id
+                  value: 2
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: title
+                  value: "task4"
+              - column:
+                  name: project_id
+                  value: 2
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: title
+                  value: "task5"
+              - column:
+                  name: project_id
+                  value: 3
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: title
+                  value: "task6"
+              - column:
+                  name: project_id
+                  value: 3
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  value: 7
+              - column:
+                  name: title
+                  value: "task7"
+              - column:
+                  name: project_id
+                  value: 4
+        - insert:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  value: 8
+              - column:
+                  name: title
+                  value: "task8"
+              - column:
+                  name: project_id
+                  value: 4

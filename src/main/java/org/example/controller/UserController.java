@@ -10,6 +10,10 @@ import org.example.exception.NotFoundExeption;
 import org.example.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.token.Sha512DigestUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.DigestUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +40,7 @@ public class UserController {
     public AuthUser login(@RequestParam(value = "login", required = true) String login,
                           @RequestParam(value = "password", required = true) String password) {
 
+        password = Sha512DigestUtils.shaHex(password);
         UserDTO userDTO = userService.findByLoginAndPassword(login, password);
         String token = getJWTToken(login);
         AuthUser user = new AuthUser();
@@ -51,6 +56,7 @@ public class UserController {
         if (userService.existsByLogin(createUserDTO.getLogin())) {
             throw new NotFoundExeption("User exits");
         }
+        createUserDTO.setPassword(Sha512DigestUtils.shaHex(createUserDTO.getPassword()));
         UserDTO userDTO = userService.save(createUserDTO);
         String token = getJWTToken(userDTO.getLogin());
         AuthUser user = new AuthUser();
