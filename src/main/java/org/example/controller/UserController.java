@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -51,7 +52,7 @@ public class UserController {
 
     @PostMapping("/register")
     @ApiOperation("Register new users")
-    public AuthUser register(@RequestBody @NotNull CreateUserDTO createUserDTO) {
+    public AuthUser register(@RequestBody @Valid @NotNull CreateUserDTO createUserDTO) {
 
         if (userService.existsByLogin(createUserDTO.getLogin())) {
             throw new NotFoundException("User exits");

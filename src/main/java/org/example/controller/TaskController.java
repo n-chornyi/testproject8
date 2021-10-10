@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class TaskController {
     @PostMapping("/{projectId}/task")
     @ApiOperation("Add new task")
     public BaseTaskDTO addNew(@PathVariable(name = "projectId") @NotNull int projectId,
-                              @RequestBody @NotNull CreateTaskDTO createTaskDTO) {
+                              @RequestBody @Valid @NotNull CreateTaskDTO createTaskDTO) {
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         return taskService.save(projectId, createTaskDTO, login);
     }
@@ -63,7 +64,7 @@ public class TaskController {
     @ApiOperation("Update task By ID")
     public BaseTaskDTO updateTask(@PathVariable(name = "projectId") @NotNull int projectId,
                                   @PathVariable(name = "taskId") @NotNull int taskId,
-                                  @RequestBody @NotNull UpdateTaskDTO updateTaskDTO) {
+                                  @RequestBody @Valid @NotNull UpdateTaskDTO updateTaskDTO) {
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         return taskService.updateById(projectId, taskId, updateTaskDTO, login);
     }
