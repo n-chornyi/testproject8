@@ -3,7 +3,7 @@ package org.example.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.user.CreateUserDTO;
 import org.example.dto.user.UserDTO;
-import org.example.exception.NotFoundException;
+import org.example.exception.ErrorAuth;
 import org.example.mapper.UserMapper;
 import org.example.repository.UserRepository;
 import org.example.service.UserService;
@@ -19,14 +19,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO findByLoginAndPassword(String login, String password) {
         return userMapper.getDTO(userRepository.findByLoginAndPassword(login,password).orElseThrow(
-                () -> new NotFoundException("User not found")
+                () -> new ErrorAuth("User not found")
         ));
     }
 
     @Override
     public UserDTO findByLogin(String login) {
         return userMapper.getDTO(userRepository.findByLogin(login)
-                .orElseThrow(() -> new NotFoundException("User not found")));
+                .orElseThrow(() -> new ErrorAuth("User not found")));
     }
 
     @Override

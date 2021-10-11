@@ -8,6 +8,7 @@ import org.example.dto.task.UpdateTaskDTO;
 import org.example.service.TaskService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("/project")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class TaskController {
 
     private final TaskService taskService;

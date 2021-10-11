@@ -54,7 +54,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<BaseProjectDTO> getAll(String login) {
-        return projectMapper.getAll(projectRepository.findAllByUserLogin(login));
+        return projectMapper.getAll(projectRepository.findAllByUserLoginOrderById(login));
     }
 
     @Override

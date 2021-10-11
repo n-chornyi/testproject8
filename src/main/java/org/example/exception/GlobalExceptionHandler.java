@@ -28,6 +28,16 @@ public class GlobalExceptionHandler {
                 .build();
     }
 
+    @ExceptionHandler(ErrorAuth.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ExceptionDetails handleErrorAuth(APIException exception) {
+        return ExceptionDetails.builder()
+                .message(exception.getMessage())
+                .cause(ExceptionCause.ERROR_AUTH)
+                .build();
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)

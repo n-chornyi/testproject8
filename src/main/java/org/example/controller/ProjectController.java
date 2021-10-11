@@ -8,6 +8,7 @@ import org.example.dto.project.UpdateProjectDTO;
 import org.example.service.ProjectService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("/project")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class ProjectController {
 
     private final ProjectService projectService;
@@ -46,6 +48,7 @@ public class ProjectController {
     @PostMapping
     @ApiOperation("Add new project")
     public BaseProjectDTO addProject(@RequestBody @Valid @NotNull CreateProjectDTO project) {
+        System.out.println(project.getName());
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         return projectService.save(project, login);
     }
