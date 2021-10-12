@@ -26,6 +26,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -41,7 +42,7 @@ public class UserController {
     @ApiOperation("Authorization user")
     public AuthUser login(@RequestParam(value = "login", required = true) String login,
                           @RequestParam(value = "password", required = true) String password) {
-
+        login = login.toLowerCase();
         password = Sha512DigestUtils.shaHex(password);
         UserDTO userDTO = userService.findByLoginAndPassword(login, password);
         String token = getJWTToken(login);
@@ -59,6 +60,7 @@ public class UserController {
         if (userService.existsByLogin(createUserDTO.getLogin())) {
             throw new NotFoundException("User exits");
         }
+        createUserDTO.setLogin(createUserDTO.getLogin().toLowerCase());
         createUserDTO.setPassword(Sha512DigestUtils.shaHex(createUserDTO.getPassword()));
         UserDTO userDTO = userService.save(createUserDTO);
         String token = getJWTToken(userDTO.getLogin());
