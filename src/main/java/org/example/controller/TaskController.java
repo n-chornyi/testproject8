@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.task.BaseTaskDTO;
 import org.example.dto.task.CreateTaskDTO;
+import org.example.dto.task.UpdatePriority;
 import org.example.dto.task.UpdateTaskDTO;
 import org.example.service.TaskService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -52,6 +53,14 @@ public class TaskController {
                               @RequestBody @Valid @NotNull CreateTaskDTO createTaskDTO) {
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         return taskService.save(projectId, createTaskDTO, login);
+    }
+
+    @PostMapping("/{projectId}/task/update")
+    @ApiOperation("Update priority")
+    public boolean updatePriority(@PathVariable(name = "projectId") @NotNull int projectId,
+                              @RequestBody @Valid @NotNull UpdatePriority updatePriority) {
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        return taskService.updatePriority(projectId, updatePriority, login);
     }
 
     @DeleteMapping("/{projectId}/task/{taskId}")

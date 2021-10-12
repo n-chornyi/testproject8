@@ -11,13 +11,10 @@ import java.util.Optional;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
-    @EntityGraph(attributePaths = {"tasks"})
     List<Project> findAllByUserLoginOrderById(String login);
 
     @EntityGraph(attributePaths = {"tasks"})
     Optional<Project> findByIdAndUserLogin(int id, String login);
-
-    boolean existsById(int id);
 
     boolean existsByIdAndUserLogin(int id, String login);
 

@@ -38,6 +38,9 @@ public class Task {
     @Column(name = "end_time")
     private LocalDateTime endTime;
 
+    @Column(name = "priority")
+    private int priority;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "project_id")
     private Project project;

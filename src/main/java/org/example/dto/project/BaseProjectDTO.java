@@ -9,5 +9,4 @@ public class BaseProjectDTO {
 
     private int id;
     private String name;
-    private Set<BaseTaskDTO> tasks;
 }

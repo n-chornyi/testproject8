@@ -28,3 +28,7 @@ databaseChangeLog:
                   type: integer
                   constraints:
                     nullable: false
+              - column:
+                  name: priority
+                  type: integer
+                  autoIncrement: true

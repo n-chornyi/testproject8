@@ -3,6 +3,7 @@ package org.example.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.task.BaseTaskDTO;
 import org.example.dto.task.CreateTaskDTO;
+import org.example.dto.task.UpdatePriority;
 import org.example.dto.task.UpdateTaskDTO;
 import org.example.entity.Task;
 import org.example.exception.NotFoundException;
@@ -51,7 +52,20 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<BaseTaskDTO> getAll(int projectId, String login) {
-        return tasksMapper.getAll(taskRepository.findAllByProjectIdAndProjectUserLogin(projectId, login));
+        return tasksMapper.getAll(taskRepository.findAllByProjectIdAndProjectUserLoginOrderByPriority(projectId, login));
+    }
+
+    @Override
+    @Transactional
+    public boolean updatePriority(int projectId, UpdatePriority update, String login) {
+        if (!projectRepository.existsByIdAndUserLogin(projectId, login)) {
+            throw new NotFoundException("Project not found");
+        }
+        String[] priority = update.getIndexes().split(";");
+        for (int i = 0; i < priority.length; i++) {
+            taskRepository.updatePriority(i, Integer.parseInt(priority[i]));
+        }
+        return true;
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.example.dto.project.BaseProjectDTO;
 import org.example.dto.project.CreateProjectDTO;
 import org.example.dto.project.UpdateProjectDTO;
 import org.example.entity.Project;
+import org.example.entity.Task;
 import org.example.entity.User;
 import org.example.exception.NotFoundException;
 import org.example.mapper.ProjectMapper;
@@ -14,6 +15,7 @@ import org.example.service.ProjectService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -54,7 +56,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<BaseProjectDTO> getAll(String login) {
-        return projectMapper.getAll(projectRepository.findAllByUserLoginOrderById(login));
+        List<BaseProjectDTO> temp = projectMapper.getAll(projectRepository.findAllByUserLoginOrderById(login));
+        return temp;
     }
 
     @Override

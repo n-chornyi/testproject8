@@ -11,5 +11,6 @@ public class BaseTaskDTO {
     private String title;
     private boolean status;
     private LocalDateTime endTime;
+    private int priority;
 
 }
