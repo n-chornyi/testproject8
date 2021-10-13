@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">    
+    <title>ToDo List</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/toastr.min.css">
+	
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,500&display=swap" rel="stylesheet">
+
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>	
+	<script src="js/toastr.min.js"></script>	
+	<script src="js/Sortable.js"></script>
+	
+</head>
+
+<body>
+	<section id="footer">
+		<div class="container">
+			<div class="wrapper container">
+				<header class="header1">SIMPLE TODO LIST</header>
+				<header class="header2">FROM RUBY GARAGE</header>
+			</div>
+		</div>  
+	</section>
+
+	<section id="add">
+		<div class="container">
+			<div class="wrapper container">
+				<button class="sliding-button" onClick="newProject()">
+					<img class="iconSize" src="img/add.png" alt="+" style="vertical-align: middle">
+					Add TODO List
+				</button>
+			</div>
+		</div>  		
+	</section>
+	
+	<section id="logout">
+		<div class="container">
+			<div class="wrapper container">
+				<button class="sliding-button" onClick="logout()">
+					<img class="iconSize" src="img/logout.png" alt="+" style="vertical-align: middle">
+					Logout
+				</button>
+			</div>
+		</div>  		
+	</section>
+
+	<section id="copyrigth">
+		<div class="container">
+			<div class="wrapper container">
+				<header class="copyrigth">Ruby Garage &#169; 2021</header>		
+			</div>
+		</div>  
+	</section>
+
+<div class="modal fade" id="modal-project" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabelProject">Add new project</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div>
+			<div class="modal-body centered">
+				<p>Name project </p> 
+				<input id="textProject" type="text" class="form-control" aria-describedby="basic-addon1" style="color: black; margin-left: 10px; font: 12pt sans-serif;">
+			</div>
+			<div style="text-align: center; margin-bottom: 10px; color: red;">
+				<p id="errorProject"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button id="saveProject" type="button" class="btn btn-primary">Add</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal-task" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabelTask">Edit task</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div>
+			<div class="modal-body centered">
+				<p>Title task </p> 
+				<input id="titleTask" type="text" class="form-control" aria-describedby="basic-addon1" style="color: black; margin-left: 10px; font: 12pt sans-serif;">
+			</div>
+			<div class="modal-body centered">
+				<p>End time </p> 
+				<input type="date" id="endDateTask" min="2021-01-01" max="2025-12-31" name="date" style="margin-left: 10px;"/>
+			</div>		
+			
+			<div class="modal-body centered">
+				<p>Do you finish this task? </p> 
+				<input id="statusTask" type="checkbox" checked style="margin-left: 10px;">
+			</div>
+			<div style="text-align: center; margin-bottom: 10px; color: red;">
+				<p id="errorTask"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button id="saveTask" type="button" class="btn btn-primary">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal-auth" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header centered">
+				<h5 class="modal-title" id="exampleModalLabelTask">Authorization</h5>				
+			</div>
+			<div class="centered">
+				<p>Enter login</p> 				
+			</div>			
+			<div class="centered">				
+				<input id="authLogin" type="text" class="form-control" aria-describedby="basic-addon1" style="color: black; margin-left: 10px; font: 12pt sans-serif;">
+			</div>			
+			<div class="centered">
+				<p>Enter password</p> 				
+			</div>			
+			<div class="centered">				
+				<input id="authPassword" name="authPassword" type="password" placeholder="" class="form-control" aria-describedby="basic-addon1" style="color: black; margin-left: 10px; font: 12pt sans-serif;">
+			</div>
+			<div style="text-align: center; margin-bottom: 10px; margin-top: 10px; color: red;">
+				<p id="errorAuth"></p>
+			</div>
+			<div class="modal-footer centered">				
+				<button id="authUser" type="button" class="btn btn-primary" style="width: 200px;" onclick="singIn();">Sign in</button>
+			</div>
+			<div class="centered" style="padding-bottom: 15px;">				
+				<button id="registerUser" type="button" class="btn btn-primary" onClick="showRegForm()">Sign up</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal-register" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header centered">
+				<h5 class="modal-title" id="exampleModalLabelTask">Register</h5>				
+			</div>
+			<div class="centered">
+				<p>Enter login</p> 				
+			</div>			
+			<div class="centered">				
+				<input id="regLogin" type="text" class="form-control" aria-describedby="basic-addon1" style="color: black; margin-left: 10px; font: 12pt sans-serif;">
+			</div>			
+			<div class="centered">
+				<p>Enter password</p> 				
+			</div>			
+			<div class="centered">				
+				<input id="regPassword" type="password" name="regPassword"class="form-control" aria-describedby="basic-addon1" style="color: black; margin-left: 10px; font: 12pt sans-serif;">
+			</div>
+			<div class="centered">
+				<p>Repeat password</p> 				
+			</div>			
+			<div class="centered">				
+				<input id="regRePassword" type="password" name="regRePassword"class="form-control" aria-describedby="basic-addon1" style="color: black; margin-left: 10px; font: 12pt sans-serif;">
+			</div>			
+			<div class="centered">
+				<p>Enter e-mail</p> 				
+			</div>			
+			<div class="centered">				
+				<input id="regEmail" type="text" class="form-control" aria-describedby="basic-addon1" style="color: black; margin-left: 10px; font: 12pt sans-serif;">
+			</div>
+
+			<div style="text-align: center; margin-bottom: 10px; margin-top: 10px; color: red;">
+				<p id="errorReg"></p>
+			</div>
+			<div class="modal-footer centered">				
+				<button id="registerUser" type="button" class="btn btn-primary" onClick="signUp()" style="width: 200px;">Sign up</button>
+			</div>
+			<div class="centered" style="padding-bottom: 15px;">				
+				<button id="authUser" type="button" class="btn btn-primary" onClick="showAuthForm()">Sign in</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="js/variable.js"></script>
+<script src="js/work.js"></script>
+</body>
+</html>
